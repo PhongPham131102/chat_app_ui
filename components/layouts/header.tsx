@@ -12,6 +12,7 @@ import {
   DrawerTitle,
   DrawerClose,
 } from "@/components/ui/drawer";
+import { LoginModal } from "@/components/auth/login-modal";
 
 const navLinks = [
   { label: "Trang chủ", href: "/" },
@@ -24,6 +25,7 @@ const navLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
 
   return (
     <>
@@ -53,7 +55,10 @@ export default function Header() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Button className="px-9! py-5! hidden xl:flex  bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80">
+          <Button
+            onClick={() => setLoginOpen(true)}
+            className="px-9! py-5! hidden xl:flex  bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80"
+          >
             Đăng nhập
           </Button>
           <div className="flex justify-center items-center gap-3 text-md">
@@ -143,12 +148,17 @@ export default function Header() {
                 <span className="text-sm">EN</span>
               </button>
             </div>
-            <Button className="w-full py-5! bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80">
+            <Button
+              onClick={() => { setOpen(false); setLoginOpen(true); }}
+              className="w-full py-5! bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80"
+            >
               Đăng nhập
             </Button>
           </div>
         </DrawerContent>
       </Drawer>
+
+      <LoginModal open={loginOpen} onOpenChange={setLoginOpen} />
     </>
   );
 }
