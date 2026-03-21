@@ -37,11 +37,11 @@ export default function Header() {
               height={40}
             />
           </div>
-          <div className=" gap-4 xl:gap-8 justify-center items-center px-10 w-full xl:flex hidden">
+          <div className=" gap-4 xl:gap-6 justify-start items-center px-10 w-full xl:flex hidden">
             {navLinks.map((link) => (
               <div
                 key={link.href}
-                className="group relative flex items-center gap-1.5 hover:opacity-80 text-[12px]! xl:text-[16px]! cursor-pointer"
+                className="group relative flex items-center gap-1.5 hover:opacity-80  font-extralight text-[12px]! xl:text-[15px]! cursor-pointer"
               >
                 <Link href={link.href}>{link.label}</Link>
                 <div className="absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-300">
