@@ -23,11 +23,11 @@ export default function Header() {
             height={40}
           />
         </div>
-        <div className="flex gap-10 justify-center items-center px-10 w-full">
+        <div className=" gap-4 xl:gap-8 justify-center items-center px-10 w-full xl:flex hidden">
           {navLinks.map((link) => (
             <div
               key={link.href}
-              className="group relative flex items-center gap-1.5 hover:opacity-80 cursor-pointer"
+              className="group relative flex items-center gap-1.5 hover:opacity-80 text-[12px]! xl:text-[16px]! cursor-pointer"
             >
               <Link href={link.href}>{link.label}</Link>
               <div className="absolute -bottom-1 left-0 w-full h-0.5 transition-all duration-300">
@@ -39,19 +39,24 @@ export default function Header() {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Button className="px-9! py-5!  bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80">
+        <Button className="px-9! py-5! hidden xl:flex  bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80">
           Đăng nhập
         </Button>
         <div className="flex justify-center items-center gap-3 text-md">
-          <button className="flex items-center gap-1.5 hover:opacity-80 cursor-pointer">
+          <button className=" items-center gap-1.5 hover:opacity-80 cursor-pointer hidden md:flex">
             <VN title="Tiếng Việt" className="w-6 h-4 rounded-sm" />
             <span>VN</span>
           </button>
-          <span className="opacity-60">|</span>
-          <button className="flex items-center gap-1.5 hover:opacity-80 cursor-pointer">
+          <span className="opacity-60 hidden md:flex">|</span>
+          <button className=" items-center gap-1.5 hover:opacity-80 cursor-pointer hidden md:flex">
             <GB title="English" className="w-6 h-4 rounded-sm" />
             <span>EN</span>
           </button>
+        </div>
+        <div className="flex flex-col justify-center items-center gap-1.5 xl:hidden cursor-pointer group relative w-5 h-5">
+          <span className="w-5 h-0.5 bg-white block absolute transition-all duration-300 top-1 group-hover:top-1/2 group-hover:-translate-y-1/2 group-hover:rotate-45"></span>
+          <span className="w-5 h-0.5 bg-white block transition-all duration-300 group-hover:opacity-0"></span>
+          <span className="w-5 h-0.5 bg-white block absolute transition-all duration-300 bottom-1 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:-rotate-45"></span>
         </div>
       </div>
     </header>

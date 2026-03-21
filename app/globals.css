@@ -8,6 +8,7 @@
   --color-main: #392508;
   --color-main-text: #d1cec8;
   --color-whatsapp: #27d366;
+  --breakpoint-1300: 1300px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
