@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { loginSchema, registerSchema } from "@/lib/validations/auth";
 
 interface LoginModalProps {
   open: boolean;
@@ -49,141 +51,213 @@ function Divider() {
   );
 }
 
+function ErrorText({ name }: { name: string }) {
+  return (
+    <ErrorMessage
+      name={name}
+      component="p"
+      className="text-xs text-red-500 mt-1"
+    />
+  );
+}
+
 function LoginForm() {
   return (
-    <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-      <div className="flex flex-col gap-1.5">
-        <label
-          className="text-sm font-medium text-foreground"
-          htmlFor="login-email"
-        >
-          Email
-        </label>
-        <input
-          id="login-email"
-          type="email"
-          placeholder="you@example.com"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-center justify-between">
-          <label
-            className="text-sm font-medium text-foreground"
-            htmlFor="login-password"
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      validationSchema={loginSchema}
+      onSubmit={(values) => {
+        console.log("Login values:", values);
+      }}
+    >
+      {({ isSubmitting, errors, touched }) => (
+        <Form className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label
+              className="text-sm font-medium text-foreground"
+              htmlFor="login-email"
+            >
+              Email
+            </label>
+            <Field
+              as="input"
+              id="login-email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.email && touched.email
+                  ? "border-red-500"
+                  : "border-input"
+              }`}
+            />
+            <ErrorText name="email" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center justify-between">
+              <label
+                className="text-sm font-medium text-foreground"
+                htmlFor="login-password"
+              >
+                Mật khẩu
+              </label>
+              <button
+                type="button"
+                className="text-xs text-main hover:underline cursor-pointer"
+              >
+                Quên mật khẩu?
+              </button>
+            </div>
+            <Field
+              as="input"
+              id="login-password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.password && touched.password
+                  ? "border-red-500"
+                  : "border-input"
+              }`}
+            />
+            <ErrorText name="password" />
+          </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-5 bg-main text-white rounded-lg hover:bg-main/90 cursor-pointer disabled:opacity-50"
           >
-            Mật khẩu
-          </label>
+            {isSubmitting ? "Đang xử lý..." : "Đăng nhập"}
+          </Button>
+
+          <Divider />
+
           <button
             type="button"
-            className="text-xs text-main hover:underline cursor-pointer"
+            className="flex items-center justify-center gap-3 w-full border border-input rounded-lg py-2.5 text-sm font-medium hover:bg-muted transition cursor-pointer"
           >
-            Quên mật khẩu?
+            <GoogleIcon />
+            Đăng nhập với Google
           </button>
-        </div>
-        <input
-          id="login-password"
-          type="password"
-          placeholder="••••••••"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <Button
-        type="submit"
-        className="w-full py-2.5 bg-main text-white rounded-lg hover:bg-main/90 cursor-pointer"
-      >
-        Đăng nhập
-      </Button>
-
-      <Divider />
-
-      <button
-        type="button"
-        className="flex items-center justify-center gap-3 w-full border border-input rounded-lg py-2.5 text-sm font-medium hover:bg-muted transition cursor-pointer"
-      >
-        <GoogleIcon />
-        Đăng nhập với Google
-      </button>
-    </form>
+        </Form>
+      )}
+    </Formik>
   );
 }
 
 function RegisterForm() {
   return (
-    <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-      <div className="flex flex-col gap-1.5">
-        <label
-          className="text-sm font-medium text-foreground"
-          htmlFor="reg-name"
-        >
-          Họ và tên
-        </label>
-        <input
-          id="reg-name"
-          type="text"
-          placeholder="Nguyễn Văn A"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <label
-          className="text-sm font-medium text-foreground"
-          htmlFor="reg-email"
-        >
-          Email
-        </label>
-        <input
-          id="reg-email"
-          type="email"
-          placeholder="you@example.com"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <label
-          className="text-sm font-medium text-foreground"
-          htmlFor="reg-password"
-        >
-          Mật khẩu
-        </label>
-        <input
-          id="reg-password"
-          type="password"
-          placeholder="••••••••"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <div className="flex flex-col gap-1.5">
-        <label
-          className="text-sm font-medium text-foreground"
-          htmlFor="reg-confirm"
-        >
-          Xác nhận mật khẩu
-        </label>
-        <input
-          id="reg-confirm"
-          type="password"
-          placeholder="••••••••"
-          className="rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition"
-        />
-      </div>
-      <Button
-        type="submit"
-        className="w-full py-2.5 bg-main text-white rounded-lg hover:bg-main/90 cursor-pointer"
-      >
-        Tạo tài khoản
-      </Button>
+    <Formik
+      initialValues={{ name: "", email: "", password: "", confirmPassword: "" }}
+      validationSchema={registerSchema}
+      onSubmit={(values) => {
+        console.log("Register values:", values);
+      }}
+    >
+      {({ isSubmitting, errors, touched }) => (
+        <Form className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label
+              className="text-sm font-medium text-foreground"
+              htmlFor="reg-name"
+            >
+              Họ và tên
+            </label>
+            <Field
+              as="input"
+              id="reg-name"
+              name="name"
+              type="text"
+              placeholder="Họ và tên của bạn"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.name && touched.name ? "border-red-500" : "border-input"
+              }`}
+            />
+            <ErrorText name="name" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              className="text-sm font-medium text-foreground"
+              htmlFor="reg-email"
+            >
+              Email
+            </label>
+            <Field
+              as="input"
+              id="reg-email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.email && touched.email
+                  ? "border-red-500"
+                  : "border-input"
+              }`}
+            />
+            <ErrorText name="email" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              className="text-sm font-medium text-foreground"
+              htmlFor="reg-password"
+            >
+              Mật khẩu
+            </label>
+            <Field
+              as="input"
+              id="reg-password"
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.password && touched.password
+                  ? "border-red-500"
+                  : "border-input"
+              }`}
+            />
+            <ErrorText name="password" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              className="text-sm font-medium text-foreground"
+              htmlFor="reg-confirm"
+            >
+              Xác nhận mật khẩu
+            </label>
+            <Field
+              as="input"
+              id="reg-confirm"
+              name="confirmPassword"
+              type="password"
+              placeholder="••••••••"
+              className={`rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-main/50 transition ${
+                errors.confirmPassword && touched.confirmPassword
+                  ? "border-red-500"
+                  : "border-input"
+              }`}
+            />
+            <ErrorText name="confirmPassword" />
+          </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-5 bg-main text-white rounded-lg hover:bg-main/90 cursor-pointer disabled:opacity-50"
+          >
+            {isSubmitting ? "Đang xử lý..." : "Tạo tài khoản"}
+          </Button>
 
-      <Divider />
+          <Divider />
 
-      <button
-        type="button"
-        className="flex items-center justify-center gap-3 w-full border border-input rounded-lg py-2.5 text-sm font-medium hover:bg-muted transition cursor-pointer"
-      >
-        <GoogleIcon />
-        Đăng ký với Google
-      </button>
-    </form>
+          <button
+            type="button"
+            className="flex items-center justify-center gap-3 w-full border border-input rounded-lg py-2.5 text-sm font-medium hover:bg-muted transition cursor-pointer"
+          >
+            <GoogleIcon />
+            Đăng ký với Google
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 }
 
