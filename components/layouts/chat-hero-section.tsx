@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LiaDownloadSolid } from "react-icons/lia";
 export default function ChatHeroSection() {
   return (
-    <div className="px-15 w-full  md:h-[73vh] h-[50vh] py-5 ">
+    <div className="px-15 w-full  md:h-[75vh] h-[50vh] py-5 mb-20 ">
       <div className="w-full h-full relative ">
         <Image
           src="/bg-main-mother-child.webp"
