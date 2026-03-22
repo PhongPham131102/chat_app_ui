@@ -13,6 +13,7 @@ export default function Home() {
               alt="bg-main-mother-child"
               loading="eager"
               fill
+              sizes="100vw"
               className="object-cover object-top rounded-md "
             />
             <div className="absolute top-0 left-0 right-0 bottom-0  flex justify-center items-center ">
@@ -37,6 +38,7 @@ export default function Home() {
                       <Image
                         src="/good-morning.webp"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt="bg-main-mother-child"
                         className="object-contain object-top z-10"
                       />
@@ -45,6 +47,7 @@ export default function Home() {
                       <Image
                         src="/heart.webp"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt="bg-main-mother-child"
                         className="object-contain object-top z-10"
                       />
@@ -53,6 +56,7 @@ export default function Home() {
                       <Image
                         src="/coffe.webp"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt="bg-main-mother-child"
                         className="object-contain object-top z-10"
                       />
@@ -61,6 +65,7 @@ export default function Home() {
                       <Image
                         src="/wait-trip.webp"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt="bg-main-mother-child"
                         className="object-contain object-top z-10"
                       />
