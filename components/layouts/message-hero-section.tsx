@@ -23,7 +23,7 @@ export default function MessageHeroSection() {
         initial={{ opacity: 0, y: 200 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
         className="text-[30px] md:text-[47px] text-center max-w-[1080px] px-15 leading-14 text-white"
       >
         Với khả năng nhắn tin và gọi điện riêng tư, bạn có thể là chính mình,
@@ -34,7 +34,7 @@ export default function MessageHeroSection() {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 1.3 }}
         className="relative w-[80%] h-[230px] mx-auto"
       >
         <Image
