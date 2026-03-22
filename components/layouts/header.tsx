@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import VN from "country-flag-icons/react/3x2/VN";
 import GB from "country-flag-icons/react/3x2/GB";
@@ -13,6 +13,7 @@ import {
   DrawerClose,
 } from "@/components/ui/drawer";
 import { LoginModal } from "@/components/auth/login-modal";
+import useIsTop from "@/hooks/is-top.hook";
 
 const navLinks = [
   { label: "Trang chủ", href: "/" },
@@ -26,10 +27,16 @@ const navLinks = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const isTop = useIsTop();
 
   return (
     <>
-      <header className="w-full py-4 bg-main text-white flex items-center justify-between px-10 fixed top-0 left-0 right-0 z-50">
+      <header
+        className={`
+        h-18 w-full py-4 transition-all border-b border-b-transparent duration-300 fixed top-0 left-0 right-0 z-50
+        ${isTop ? "bg-main" : "bg-main/60 backdrop-blur-md border-b border-b-white/20"}
+        text-white flex items-center justify-between px-10`}
+      >
         <div className="flex gap-20 justify-between items-center w-full">
           <div className="flex items-center ">
             <Image
@@ -149,7 +156,10 @@ export default function Header() {
               </button>
             </div>
             <Button
-              onClick={() => { setOpen(false); setLoginOpen(true); }}
+              onClick={() => {
+                setOpen(false);
+                setLoginOpen(true);
+              }}
               className="w-full py-5! bg-whatsapp rounded-full text-md cursor-pointer text-white hover:bg-whatsapp/80"
             >
               Đăng nhập
