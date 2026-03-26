@@ -9,7 +9,7 @@ export default function HandlerSideBarNav() {
   return (
     <div className="w-full h-full">
       <Activity
-        mode={isActiveSidebar === SidebarType.CHAT ? "visible" : "hidden"}
+        mode={isActiveSidebar === SidebarType.MESSAGE ? "visible" : "hidden"}
       >
         <ChatSideBarNav />
       </Activity>

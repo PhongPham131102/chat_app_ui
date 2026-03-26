@@ -1,3 +1,4 @@
+"use client";
 import SideBarNav from "@/components/chat/side-bar-nav";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -6,11 +7,13 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import HandlerSideBarNav from "@/components/chat/handler-side-bar-nav";
+import useSyncRouteToStore from "@/hooks/use-sync-route-to-store";
 export default function ChatLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  useSyncRouteToStore();
   return (
     <TooltipProvider>
       <div className="w-full h-screen flex flex-col-reverse sm:flex-row overflow-hidden bg-white">

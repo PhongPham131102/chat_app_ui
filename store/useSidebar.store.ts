@@ -1,6 +1,6 @@
 import { create } from "zustand";
 export enum SidebarType {
-  CHAT,
+  MESSAGE,
   STATUS,
   CHANNEL,
   COMMUNITY,
@@ -8,11 +8,15 @@ export enum SidebarType {
 interface useSideBarStore {
   isActiveSidebar: SidebarType;
   setisActiveSideBar: (isActiveSidebar: SidebarType) => void;
+  activeId: string | null;
+  setActiveId: (activeId: string | null) => void;
 }
 const useSideBarStore = create<useSideBarStore>((set) => ({
-  isActiveSidebar: SidebarType.CHAT,
+  isActiveSidebar: SidebarType.MESSAGE,
   setisActiveSideBar: (isActiveSidebar: SidebarType) =>
     set({ isActiveSidebar }),
+  activeId: null,
+  setActiveId: (activeId: string | null) => set({ activeId }),
 }));
 
 export default useSideBarStore;

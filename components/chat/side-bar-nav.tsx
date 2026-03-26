@@ -11,33 +11,41 @@ import {
   MessageCircleMore,
   UsersRound,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import useSideBarStore, { SidebarType } from "@/store/useSidebar.store";
+import { UrlFeatureEnum } from "@/app/enums/url.enum";
 export default function SideBarNav() {
   const { isActiveSidebar, setisActiveSideBar } = useSideBarStore();
+  const router = useRouter();
   const icons: {
     icon: LucideIcon;
     label: string;
     type: SidebarType;
+    url: UrlFeatureEnum;
   }[] = [
     {
       icon: MessageCircleMore,
       label: "Đoạn chat",
-      type: SidebarType.CHAT,
+      type: SidebarType.MESSAGE,
+      url: UrlFeatureEnum.MESSAGE,
     },
     {
       icon: CircleDotDashed,
       label: "Trạng thái",
       type: SidebarType.STATUS,
+      url: UrlFeatureEnum.STATUS,
     },
     {
       icon: Mailbox,
       label: "Kênh",
       type: SidebarType.CHANNEL,
+      url: UrlFeatureEnum.CHANNEL,
     },
     {
       icon: UsersRound,
       label: "Cộng đồng",
       type: SidebarType.COMMUNITY,
+      url: UrlFeatureEnum.COMMUNITY,
     },
   ];
   return (
@@ -49,7 +57,7 @@ export default function SideBarNav() {
               className={`p-2 rounded-full ${
                 isActiveSidebar === icon.type && "bg-chat-active"
               }`}
-              onClick={() => setisActiveSideBar(icon.type)}
+              onClick={() => router.push(icon.url)}
             >
               <icon.icon
                 className={`size-6 sm:size-5 text-neutral-700 cursor-pointer `}
@@ -64,4 +72,3 @@ export default function SideBarNav() {
     </div>
   );
 }
-
