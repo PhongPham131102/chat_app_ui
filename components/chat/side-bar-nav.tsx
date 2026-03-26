@@ -41,7 +41,7 @@ export default function SideBarNav() {
     },
   ];
   return (
-    <div className="flex flex-col gap-4 border-r-[0.5px] h-full w-15 border-r-gray-200 py-5 bg-chat-layout">
+    <div className="flex flex-row sm:flex-col gap-4 border-t-[0.5px] sm:border-t-0 sm:border-r-[0.5px] h-auto sm:h-full w-full sm:w-15 border-gray-200 py-3 sm:py-5 bg-chat-layout shrink-0 justify-around sm:justify-start">
       {icons.map((icon, index) => (
         <Tooltip key={index}>
           <TooltipTrigger className={`flex items-center justify-center `}>
@@ -52,15 +52,16 @@ export default function SideBarNav() {
               onClick={() => setisActiveSideBar(icon.type)}
             >
               <icon.icon
-                className={`size-5 text-neutral-700 cursor-pointer `}
+                className={`size-6 sm:size-5 text-neutral-700 cursor-pointer `}
               />
             </div>
           </TooltipTrigger>
-          <TooltipContent side="right">
-            <p>Đoạn chat</p>
+          <TooltipContent side="right" className="hidden sm:block">
+            <p>{icon.label}</p>
           </TooltipContent>
         </Tooltip>
       ))}
     </div>
   );
 }
+

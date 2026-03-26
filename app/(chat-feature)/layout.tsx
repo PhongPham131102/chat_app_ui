@@ -13,15 +13,25 @@ export default function ChatLayout({
 }) {
   return (
     <TooltipProvider>
-      <div className="w-full h-screen flex">
+      <div className="w-full h-screen flex flex-col-reverse sm:flex-row overflow-hidden bg-white">
         <SideBarNav />
 
-        <ResizablePanelGroup orientation="horizontal">
-          <ResizablePanel defaultSize="25%">
+        <ResizablePanelGroup orientation="horizontal" className="flex-1">
+          <ResizablePanel
+            defaultSize={"25%"}
+            minSize={"20%"}
+            className="flex-1 sm:flex-none border-none"
+          >
             <HandlerSideBarNav />
           </ResizablePanel>
-          <ResizableHandle withHandle />
-          <ResizablePanel defaultSize="75%">{children}</ResizablePanel>
+          <ResizableHandle withHandle className="hidden sm:flex" />
+          <ResizablePanel
+            defaultSize={"75%"}
+            minSize={"50%"}
+            className="hidden sm:block"
+          >
+            <div className="h-full w-full">{children}</div>
+          </ResizablePanel>
         </ResizablePanelGroup>
       </div>
     </TooltipProvider>
