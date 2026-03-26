@@ -8,6 +8,8 @@
   --color-main: #392508;
   --color-main-blur: #fcf5eb;
   --color-main-text: #d1cec8;
+  --color-chat-layout: #f7f5f3;
+  --color-chat-active: #eceae8;
   --color-whatsapp: #27d366;
   --breakpoint-1300: 1300px;
   --font-jakarta: var(--font-jakarta);
